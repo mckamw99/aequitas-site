@@ -2,25 +2,93 @@
   <div class="wrap">
     <span class="label">Contact</span>
     <h1 class="display-xl">Let's talk about what you need.</h1>
-    <p class="lead">Book a free 20-minute consult, or send a note and we'll reply within one business day.</p>
+    <p class="lead">Book a free 20-minute consult. Send a short note and we'll reply within one business day.</p>
   </div>
 </section>
 
-<section>
-  <div class="wrap grid two">
-    <ul class="contact-list">
-      <li><span class="label">Book a consult</span><a class="btn" href="https://forms.gle/424uzcZUBVGr74ap8" target="_blank" rel="noopener">Request a time</a></li>
-      <li><span class="label">Email</span><a href="mailto:info@aequitasnetwork.com">info@aequitasnetwork.com</a></li>
-      <li><span class="label">Practices</span>Community Technology &middot; Data &amp; Learning Analytics &middot; People &amp; Learning</li>
-    </ul>
-    <div class="card">
-      <h3>What to include in your note</h3>
-      <ul class="checklist">
-        <li>Your name and organization</li>
-        <li>Which practice you're interested in, or "not sure"</li>
-        <li>What's not working today, in a sentence or two</li>
-      </ul>
-      <p style="margin-top:24px"><a class="btn secondary" href="mailto:info@aequitasnetwork.com?subject=Consult%20request">Email us</a></p>
+<section id="consult">
+  <div class="wrap contact-grid">
+    <form class="consult-form" id="consult-form" action="https://docs.google.com/forms/d/e/1FAIpQLSfkbcN9zyq6w5OP0y5UgLdh43UC2Hg7CBL9TvBKrChgb105Ww/formResponse" method="POST" target="form-sink" novalidate>
+      <h2 class="display">Request a consult</h2>
+      <div class="field-row">
+        <div class="field">
+          <label for="f-name">Name <span class="req" aria-hidden="true">*</span></label>
+          <input id="f-name" name="entry.35581445" type="text" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label for="f-org">Organization <span class="opt">(optional)</span></label>
+          <input id="f-org" name="entry.1870852446" type="text" autocomplete="organization">
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="f-email">Email <span class="req" aria-hidden="true">*</span></label>
+          <input id="f-email" name="entry.226634043" type="email" autocomplete="email" required>
+        </div>
+        <div class="field">
+          <label for="f-phone">Phone <span class="opt">(optional)</span></label>
+          <input id="f-phone" name="entry.1913107461" type="tel" autocomplete="tel">
+        </div>
+      </div>
+      <fieldset class="field">
+        <legend>Which service are you interested in? <span class="req" aria-hidden="true">*</span></legend>
+        <div class="choices">
+          <label class="choice"><input type="radio" name="entry.1987311082" value="Community Technology" required> Community Technology</label>
+          <label class="choice"><input type="radio" name="entry.1987311082" value="Data &amp; Learning Analytics"> Data &amp; Learning Analytics</label>
+          <label class="choice"><input type="radio" name="entry.1987311082" value="People &amp; Learning"> People &amp; Learning</label>
+          <label class="choice"><input type="radio" name="entry.1987311082" value="Not sure"> Not sure</label>
+        </div>
+      </fieldset>
+      <div class="field">
+        <label for="f-msg">What can we help with?</label>
+        <textarea id="f-msg" name="entry.362280156" rows="5" placeholder="What's not working today, in a sentence or two"></textarea>
+      </div>
+      <p class="form-error" id="form-error" role="alert" hidden>Please fill in your name, a valid email, and pick a service.</p>
+      <button class="btn" type="submit">Send request</button>
+      <p class="caption form-note">Fields marked * are required. We use your details only to reply to you.</p>
+    </form>
+    <div class="form-thanks" id="form-thanks" hidden tabindex="-1">
+      <h2 class="display">Thanks, we've got it.</h2>
+      <p>We'll reply within one business day. If it's urgent, email <a href="mailto:info@aequitasnetwork.com">info@aequitasnetwork.com</a>.</p>
     </div>
+    <iframe name="form-sink" id="form-sink" title="Form submission" hidden></iframe>
+
+    <aside class="contact-side">
+      <div class="card">
+        <span class="label">Email</span>
+        <p><a href="mailto:info@aequitasnetwork.com">info@aequitasnetwork.com</a></p>
+        <span class="label">Practices</span>
+        <p>Community Technology<br>Data &amp; Learning Analytics<br>People &amp; Learning</p>
+        <span class="label">What happens next</span>
+        <ul class="checklist">
+          <li>We reply within one business day.</li>
+          <li>A free 20-minute call to understand the problem.</li>
+          <li>A short written proposal, if it's a fit.</li>
+        </ul>
+      </div>
+    </aside>
   </div>
 </section>
+
+<script>
+(function () {
+  var form = document.getElementById('consult-form');
+  var err = document.getElementById('form-error');
+  var thanks = document.getElementById('form-thanks');
+  var sink = document.getElementById('form-sink');
+  var sent = false;
+  form.addEventListener('submit', function (e) {
+    var name = form.querySelector('#f-name').value.trim();
+    var email = form.querySelector('#f-email');
+    var service = form.querySelector('input[name="entry.1987311082"]:checked');
+    if (!name || !email.value.trim() || !email.checkValidity() || !service) {
+      e.preventDefault(); err.hidden = false; return;
+    }
+    err.hidden = true; sent = true;
+  });
+  sink.addEventListener('load', function () {
+    if (!sent) return;
+    form.hidden = true; thanks.hidden = false; thanks.focus();
+  });
+})();
+</script>
