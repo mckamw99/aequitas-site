@@ -95,7 +95,11 @@ def page(file, title, desc, body):
 <link rel="canonical" href="https://www.aequitasnetwork.com/{'' if file == 'index.html' else file}">
 <link rel="icon" href="assets/favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-<meta property="og:image" content="https://www.aequitasnetwork.com/assets/aequitas-network-horizontal.png">
+<meta property="og:image" content="https://www.aequitasnetwork.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Aequitas Network: Don't just check the box.">
+<meta name="twitter:card" content="summary_large_image">
 {FONTS}
 <link rel="stylesheet" href="assets/styles.css">
 </head>
