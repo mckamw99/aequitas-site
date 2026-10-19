@@ -94,7 +94,7 @@ small, .caption { font-size: 12px; line-height: 18px; color: var(--ink-muted); }
 .hero-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 48px; align-items: center; }
 .hero .actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
 .hero .nodes { width: 100%; max-width: 380px; justify-self: end; }
-.hero .sub-logo { width: 220px; justify-self: end; background: var(--surface); border-radius: var(--radius-lg); padding: 16px; }
+.hero .sub-logo { width: 220px; height: auto; box-sizing: content-box; justify-self: end; background: var(--surface); border-radius: var(--radius-lg); padding: 16px; }
 @media (max-width: 860px) { .hero-grid { grid-template-columns: 1fr; } .hero .nodes { display: none; } .hero .sub-logo { justify-self: start; width: 160px; } }
 .endorse { font-size: 14px; color: var(--ink-muted); margin-top: 16px; }
 
