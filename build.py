@@ -19,6 +19,8 @@ PAGES = [
      "Dashboards, reporting, data governance, and LMS strategy led by a Certified Data Management Professional."),
     ("people-learning.html", "People & Learning", "HR & Learning Consulting for Small Businesses | Aequitas Network",
      "HR and learning and development consulting for small businesses, plus leadership and team workshops and assessments."),
+    ("books.html", "Books", "Books | Aequitas Network",
+     "Research-based tools for confronting whiteness inside LGBTQ+ communities, from Aequitas Network LLC."),
     ("about.html", "About", "About | Aequitas Network",
      "Our mission, how we work, and the team behind Aequitas Network."),
     ("contact.html", "Contact", "Contact | Aequitas Network",
@@ -26,6 +28,13 @@ PAGES = [
 ]
 
 NAV = [p for p in PAGES if p[0] not in ("index.html", "contact.html")]
+
+# Open Graph image: site default, with per-page overrides (url, width, height, alt)
+OG_DEFAULT = ("assets/og-image.png", 1200, 630, "Aequitas Network: Don't just check the box.")
+OG_IMAGES = {
+    "books.html": ("images/RainbowReckoning_cover.jpg", 600, 776,
+                   "Cover of The Rainbow Reckoning by Matthew William McKay, PhD: rainbow brushstrokes fading on white paper"),
+}
 
 FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">'
          '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
@@ -82,6 +91,7 @@ FOOTER = """<footer class="site-footer">
 
 
 def page(file, title, desc, body):
+    og_src, og_w, og_h, og_alt = OG_IMAGES.get(file, OG_DEFAULT)
     return f"""<!doctype html>
 <html lang="en">
 <head>
@@ -95,10 +105,10 @@ def page(file, title, desc, body):
 <link rel="canonical" href="https://www.aequitasnetwork.com/{'' if file == 'index.html' else file}">
 <link rel="icon" href="assets/favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-<meta property="og:image" content="https://www.aequitasnetwork.com/assets/og-image.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Aequitas Network: Don't just check the box.">
+<meta property="og:image" content="https://www.aequitasnetwork.com/{og_src}">
+<meta property="og:image:width" content="{og_w}">
+<meta property="og:image:height" content="{og_h}">
+<meta property="og:image:alt" content="{og_alt}">
 <meta name="twitter:card" content="summary_large_image">
 {FONTS}
 <link rel="stylesheet" href="assets/styles.css">
